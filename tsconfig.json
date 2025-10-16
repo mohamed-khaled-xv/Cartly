@@ -1,22 +1,3 @@
 {
-  "extends": "@react-native/typescript-config/tsconfig.json",
-  "include": ["src", "src/types/declarations.d.ts", "src/types/svg.d.ts"],
-  "compilerOptions": {
-    "baseUrl": ".",
-    "paths": {
-      "@screens/*": ["src/screens/*"],
-      "@components/*": ["src/components/*"],
-      "@navigation/*": ["src/navigation/*"],
-      "@styles/*": ["src/styles/*"],
-      "@utils/*": ["src/utils/*"],
-      "@assets/*": ["src/assets/*"],
-      "@data/*": ["src/data/*"],
-      "@api/*": ["src/services/*"],
-      "@hooks/*": ["src/hooks/*"],
-      "@types/*": ["src/types/*"],
-      "@services/*": ["src/services/*"],
-      "@infrastructure/*": ["src/infrastructure/*"],
-      "@/*": ["src/*"]
-    }
-  }
+  "extends": "@react-native/typescript-config/tsconfig.json"
 }
