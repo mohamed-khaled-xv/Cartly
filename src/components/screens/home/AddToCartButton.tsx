@@ -3,16 +3,16 @@ import {Product} from '@/services/home/models/cart-types';
 import {CartIcon} from '@assets/index';
 import {Colors} from '@styles/theme';
 import {FontFamily} from '@styles/typography';
-import React from 'react';
+import React, {useCallback} from 'react';
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {useDispatch} from 'react-redux';
 
-const AddToCartButton = (Props: {ProductItem: Product}) => {
+const AddToCartButton = React.memo((Props: {ProductItem: Product}) => {
   const dispatch = useDispatch();
 
-  const handleCartPress = () => {
+  const handleCartPress = useCallback(() => {
     dispatch(addToCart(Props.ProductItem));
-  };
+  }, [dispatch, Props.ProductItem]);
 
   return (
     <TouchableOpacity style={styles.ButtonContainer} onPress={handleCartPress}>
@@ -22,7 +22,9 @@ const AddToCartButton = (Props: {ProductItem: Product}) => {
       </View>
     </TouchableOpacity>
   );
-};
+});
+
+AddToCartButton.displayName = 'AddToCartButton';
 
 const styles = StyleSheet.create({
   ButtonContainer: {

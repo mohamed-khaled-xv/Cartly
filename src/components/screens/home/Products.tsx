@@ -4,13 +4,12 @@ import {Colors} from '@styles/theme';
 import {FontFamily} from '@styles/typography';
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
-import AddToCartButton from './AddToCartButton';
+import CartController from './CartController';
 import ProductHero from './ProductHero';
 import ProductInfo from './ProductInfo';
-import CartController from './CartController';
 
 // Destructure props for clarity
-const Products = (ProductItem: Product) => {
+const Products = React.memo((ProductItem: Product) => {
   const handleFavoriteToggle = () => {
     console.log('Toggle favorite for', ProductItem.title);
   };
@@ -23,13 +22,17 @@ const Products = (ProductItem: Product) => {
         handleFavoriteToggle={handleFavoriteToggle}
         image={ProductItem.images?.[0] || ImagePlaceholder}
       />
-      <ProductInfo price={ProductItem.price} name={ProductItem.title} weight={ProductItem.weight} />
-      <CartController
-        ProductItem={ProductItem}
+      <ProductInfo
+        price={ProductItem.price}
+        name={ProductItem.title}
+        weight={ProductItem.weight}
       />
+      <CartController ProductItem={ProductItem} />
     </View>
   );
-};
+});
+
+Products.displayName = 'Products';
 
 const styles = StyleSheet.create({
   card: {

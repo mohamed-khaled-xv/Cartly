@@ -1,12 +1,7 @@
 import CustomImage from '@components/shared/CustomImage';
 import {Colors} from '@styles/theme';
 import React from 'react';
-import {
-  ImageSourcePropType,
-  StyleSheet,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 type props = {
@@ -15,29 +10,33 @@ type props = {
   image: string[] | number | string;
 };
 
-const ProductHero = ({
-  isFavorite,
-  handleFavoriteToggle,
-  image,
-}: props) => {
-  return (
-    <>
-      <TouchableOpacity
-        style={styles.favoriteIcon}
-        onPress={handleFavoriteToggle}>
-        <Ionicons
-          name={isFavorite ? 'heart' : 'heart-outline'}
-          size={20}
-          color={isFavorite ? Colors.warning : Colors.textLight}
-        />
-      </TouchableOpacity>
+const ProductHero = React.memo(
+  ({isFavorite, handleFavoriteToggle, image}: props) => {
+    return (
+      <>
+        <TouchableOpacity
+          style={styles.favoriteIcon}
+          onPress={handleFavoriteToggle}>
+          <Ionicons
+            name={isFavorite ? 'heart' : 'heart-outline'}
+            size={20}
+            color={isFavorite ? Colors.warning : Colors.textLight}
+          />
+        </TouchableOpacity>
 
-      <View style={[styles.ImageContainer]}>
-        <CustomImage source={image} style={styles.Image} resizeMode="contain" />
-    </View>
-    </>
-  );
-};
+        <View style={[styles.ImageContainer]}>
+          <CustomImage
+            source={image}
+            style={styles.Image}
+            resizeMode="contain"
+          />
+        </View>
+      </>
+    );
+  },
+);
+
+ProductHero.displayName = 'ProductHero';
 
 const styles = StyleSheet.create({
   ImageContainer: {

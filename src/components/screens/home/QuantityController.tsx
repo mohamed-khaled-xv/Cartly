@@ -1,29 +1,38 @@
-import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
-import {useState} from 'react';
-import {Colors} from '@styles/theme';
-import {IncreaseIcon, DecreaseIcon} from '@assets/index';
-import {useDispatch, useSelector} from 'react-redux';
+import {
+  removeFromCartById,
+  updateQuantityById,
+} from '@/infrastructure/redux/slices/cartSlice';
 import {Product} from '@/services/home/models/cart-types';
-import {removeFromCartById, updateQuantityById} from '@/infrastructure/redux/slices/cartSlice';
-import { UseSelector } from 'react-redux';
-import { RootState } from '@infrastructure/redux/store';
+import {DecreaseIcon, IncreaseIcon} from '@assets/index';
+import {RootState} from '@infrastructure/redux/store';
+import {Colors} from '@styles/theme';
+import React, {useCallback} from 'react';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {useDispatch, useSelector} from 'react-redux';
 
-const QuantityController = (Props: {ProductItem: Product}) => {
-
-  const quantity = useSelector((state: RootState) => state.cart.Products.find(item => item.id === Props.ProductItem.id)?.quantity || 1);
+const QuantityController = React.memo((Props: {ProductItem: Product}) => {
+  const quantity = useSelector(
+    (state: RootState) =>
+      state.cart.Products.find(item => item.id === Props.ProductItem.id)
+        ?.quantity || 1,
+  );
   const dispatch = useDispatch();
 
-  const handleIncrease = () => {
-    dispatch(updateQuantityById({id: Props.ProductItem.id, quantity: quantity + 1}));
-  };
+  const handleIncrease = useCallback(() => {
+    dispatch(
+      updateQuantityById({id: Props.ProductItem.id, quantity: quantity + 1}),
+    );
+  }, [dispatch, Props.ProductItem.id, quantity]);
 
-  const handleDecrease = () => {
+  const handleDecrease = useCallback(() => {
     if (quantity > 1) {
-      dispatch(updateQuantityById({id: Props.ProductItem.id, quantity: quantity - 1}));
+      dispatch(
+        updateQuantityById({id: Props.ProductItem.id, quantity: quantity - 1}),
+      );
     } else {
       dispatch(removeFromCartById(Props.ProductItem.id));
     }
-  };
+  }, [dispatch, Props.ProductItem.id, quantity]);
 
   return (
     <View style={styles.ButtonContainer}>
@@ -38,7 +47,9 @@ const QuantityController = (Props: {ProductItem: Product}) => {
       </View>
     </View>
   );
-};
+});
+
+QuantityController.displayName = 'QuantityController';
 
 const styles = StyleSheet.create({
   ButtonContainer: {

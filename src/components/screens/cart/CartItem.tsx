@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {useDispatch} from 'react-redux';
 import type {CartItem as CartItemType} from './../../../infrastructure/redux/slices/cartSlice';
@@ -7,8 +7,7 @@ import {
   updateQuantityById,
 } from './../../../infrastructure/redux/slices/cartSlice';
 
-
-const CartItem= (item: CartItemType)=> {
+const CartItem = React.memo((item: CartItemType) => {
   const dispatch = useDispatch();
 
   const handleIncrease = () => {
@@ -18,7 +17,7 @@ const CartItem= (item: CartItemType)=> {
 
   const handleDecrease = () => {
     if (item.quantity > 1) {
-      const newQuantity =item. quantity - 1;
+      const newQuantity = item.quantity - 1;
       dispatch(updateQuantityById({id: item.id, quantity: newQuantity}));
     } else {
       dispatch(removeFromCartById(item.id));
@@ -27,7 +26,7 @@ const CartItem= (item: CartItemType)=> {
 
   const handleRemove = () => {
     dispatch(removeFromCartById(item.id));
-  }
+  };
 
   return (
     <View style={styles.cartItem}>
@@ -58,16 +57,16 @@ const CartItem= (item: CartItemType)=> {
         </TouchableOpacity>
       </View>
 
-      <TouchableOpacity
-        style={styles.removeButton}
-        onPress={handleRemove}>
+      <TouchableOpacity style={styles.removeButton} onPress={handleRemove}>
         <View style={styles.removeButtonBackground}>
           <Text style={styles.removeButtonText}>🗑</Text>
         </View>
       </TouchableOpacity>
     </View>
   );
-};
+});
+
+CartItem.displayName = 'CartItem';
 
 const styles = StyleSheet.create({
   cartItem: {
