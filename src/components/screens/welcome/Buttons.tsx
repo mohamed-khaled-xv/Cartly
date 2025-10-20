@@ -3,7 +3,7 @@ import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import CustomButton from '../../../components/shared/CustomButton';
 import {AuthStackNavigationProp} from '../../../navigation/types/authTypes';
-import {Icons} from '@/assets';
+import { GoogleIcon,ProfileIcon } from '@assets/index';
 
 const Buttons = () => {
   const navigation = useNavigation<AuthStackNavigationProp<'WelcomeScreen'>>();
@@ -11,7 +11,7 @@ const Buttons = () => {
   return (
     <View style={styles.buttonContainer}>
       <CustomButton
-        Icon={Icons.Google}
+        Icon={GoogleIcon}
         IconStyle={styles.googleIcon}
         IncomingOnPress={() => {
           navigation.navigate('LoginScreen');
@@ -20,7 +20,7 @@ const Buttons = () => {
       />
 
       <CustomButton
-        Icon={Icons.Profile}
+        Icon={ProfileIcon}
         IconStyle={styles.createAccountIcon}
         IncomingOnPress={() => {
           navigation.navigate('SignupScreen');

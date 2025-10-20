@@ -1,15 +1,20 @@
 import React from 'react';
-import {ImageBackground, StyleSheet, Text, View} from 'react-native';
-import {FontFamily} from '../../../styles/typography';
-import {Images} from '@/assets'
+import {ImageBackground, ImageSourcePropType, StyleSheet, Text, View} from 'react-native';
+import {FontFamily} from '../../styles/typography';
 
-const Hero = () => {
+type Props = {
+    imageSource?: ImageSourcePropType;
+    containerStyle?: object;
+    imageStyle?: object;
+};
+
+const Hero = (props: Props) => {
   return (
-    <View style={styles.heroSection}>
+    <View style={[styles.heroSection, props.containerStyle]}>
       <ImageBackground
-        source={Images.Welcome1}
+        source={props.imageSource}
         style={styles.heroImage}
-        imageStyle={styles.heroImageStyle}
+        imageStyle={[styles.heroImageStyle, props.imageStyle]}
       />
 
       {/* Welcome Text Overlay */}
@@ -37,8 +42,7 @@ const styles = StyleSheet.create({
   heroTextContainer: {
     position: 'absolute',
     alignSelf: 'center',
-    top: '20%',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    top: '5%',
     zIndex: 1,
   },
   heroTitle: {

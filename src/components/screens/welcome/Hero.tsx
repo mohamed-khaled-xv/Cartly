@@ -1,13 +1,13 @@
 import React from 'react';
 import {ImageBackground, StyleSheet, Text, View} from 'react-native';
 import {FontFamily} from '../../../styles/typography';
-import {Images} from '@/assets'
+import { Welcome1 } from '@/assets';
 
 const Hero = () => {
   return (
     <View style={styles.heroSection}>
       <ImageBackground
-        source={Images.Welcome1}
+        source={Welcome1}
         style={styles.heroImage}
         imageStyle={styles.heroImageStyle}
       />

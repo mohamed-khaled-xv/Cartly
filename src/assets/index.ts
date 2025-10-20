@@ -11,6 +11,7 @@ export {default as HeroBackgroundImage} from '@assets/images/home-hero-backgroun
 export {default as Household} from '@assets/images/Vacuum.png';
 export {default as Vegetables} from '@assets/images/Vegetables.png';
 export {default as Welcome1} from '@assets/images/welcome1.png';
+export {default as Welcome2} from '@assets/images/welcome2.png';
 export {default as ImagePlaceholder} from '@assets/images/ImagePlaceholder.png';
 export {default as broccoli} from '@assets/images/broccoli.png';
 export {default as grapes} from '@assets/images/grapes.png';
