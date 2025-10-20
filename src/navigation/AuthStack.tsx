@@ -26,57 +26,9 @@ const AuthStack = () => {
           gestureEnabled: false, // Disable back gesture on welcome
         }}
       />
-      <Stack.Screen
-        name="LoginScreen"
-        component={Login}
-        options={{
-          title: 'Sign In',
-          headerShown: true,
-          headerStyle: {
-            backgroundColor: '#FFFFFF',
-          },
-          headerTitleStyle: {
-            fontSize: 18,
-            fontWeight: 'bold',
-            color: '#333333',
-          },
-          headerTintColor: '#6CC51D',
-        }}
-      />
-      <Stack.Screen
-        name="SignupScreen"
-        component={Signup}
-        options={{
-          title: 'Create Account',
-          headerShown: true,
-          headerStyle: {
-            backgroundColor: '#FFFFFF',
-          },
-          headerTitleStyle: {
-            fontSize: 18,
-            fontWeight: 'bold',
-            color: '#333333',
-          },
-          headerTintColor: '#6CC51D',
-        }}
-      />
-      <Stack.Screen
-        name="ForgotPasswordScreen"
-        component={ForgotPassword}
-        options={{
-          title: 'Reset Password',
-          headerShown: true,
-          headerStyle: {
-            backgroundColor: '#FFFFFF',
-          },
-          headerTitleStyle: {
-            fontSize: 18,
-            fontWeight: 'bold',
-            color: '#333333',
-          },
-          headerTintColor: '#6CC51D',
-        }}
-      />
+      <Stack.Screen name="LoginScreen" component={Login} />
+      <Stack.Screen name="SignupScreen" component={Signup} />
+      <Stack.Screen name="ForgotPasswordScreen" component={ForgotPassword} />
     </Stack.Navigator>
   );
 };
