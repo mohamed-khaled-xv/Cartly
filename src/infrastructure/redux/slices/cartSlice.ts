@@ -6,11 +6,14 @@ export interface CartItem extends Product {
 }
 
 interface CartState {
-  Products: CartItem[];
+  products: CartItem[];
+  shippingCost?: number;
 }
 
 const initialState: CartState = {
-  Products: [],
+  products: [],
+  shippingCost: 0,
+
 };
 
 const cartSlice = createSlice({
@@ -19,11 +22,11 @@ const cartSlice = createSlice({
   reducers: {
     addToCart: (state, action: PayloadAction<Product>) => {
       if (action.payload.id !== undefined) {
-        state.Products.push({...action.payload, quantity: 1} as CartItem);
+        state.products.push({...action.payload, quantity: 1} as CartItem);
       }
     },
     removeFromCartById: (state, action: PayloadAction<number>) => {
-      state.Products = state.Products.filter(
+      state.products = state.products.filter(
         product => product.id !== action.payload,
       );
     },
@@ -31,7 +34,7 @@ const cartSlice = createSlice({
       state,
       action: PayloadAction<{id: number; quantity: number}>,
     ) => {
-      const item = state.Products.find(
+      const item = state.products.find(
         product => product.id === action.payload.id,
       );
       if (item) {
@@ -39,7 +42,7 @@ const cartSlice = createSlice({
       }
     },
     clearCart: state => {
-      state.Products = [];
+      state.products = [];
     },
   },
 });
