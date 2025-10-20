@@ -9,26 +9,22 @@ import {Colors} from '@styles/theme';
 import React, {useCallback} from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
+import useCart from '@hooks/useCart';
 
 const QuantityController = React.memo((Props: {ProductItem: Product}) => {
-  const quantity = useSelector(
-    (state: RootState) =>
-      state.cart.Products.find(item => item.id === Props.ProductItem.id)
-        ?.quantity || 1,
-  );
+
   const dispatch = useDispatch();
+  const {itemQuantity,updateQuantity} = useCart();
+
+  const quantity = itemQuantity(Props.ProductItem.id);
 
   const handleIncrease = useCallback(() => {
-    dispatch(
-      updateQuantityById({id: Props.ProductItem.id, quantity: quantity + 1}),
-    );
-  }, [dispatch, Props.ProductItem.id, quantity]);
+    updateQuantity(Props.ProductItem.id, quantity + 1);
+  }, [Props.ProductItem.id, quantity]);
 
   const handleDecrease = useCallback(() => {
     if (quantity > 1) {
-      dispatch(
-        updateQuantityById({id: Props.ProductItem.id, quantity: quantity - 1}),
-      );
+      updateQuantity(Props.ProductItem.id, quantity - 1);
     } else {
       dispatch(removeFromCartById(Props.ProductItem.id));
     }

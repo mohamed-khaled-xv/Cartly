@@ -5,46 +5,15 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import {useDispatch, useSelector} from 'react-redux';
 import CartItem from '../../components/screens/cart/CartItem';
 import {RootState} from '../../infrastructure/redux/store';
+import Summary from '../../components/screens/cart/Summary';
+import useCart from '../../hooks/useCart';
 
 const Cart = () => {
-  const dispatch = useDispatch();
-  const cartItems = useSelector((state: RootState) => state.cart.Products);
-
-  // Calculate totals
-  const subtotal = cartItems.reduce(
-    (sum, item) => sum + item.price * (item.quantity || 1),
-    0,
-  );
-  const shippingCharges = 0;
-  const total = subtotal + shippingCharges;
-
-  const Footer = () => {
-    return (
-      <View style={styles.checkoutSection}>
-        <View style={styles.summaryRow}>
-          <Text style={styles.summaryLabel}>Subtotal</Text>
-          <Text style={styles.summaryValue}>${subtotal.toFixed(2)}</Text>
-        </View>
-        <View style={styles.summaryRow}>
-          <Text style={styles.summaryLabel}>Shipping charges</Text>
-          <Text style={styles.summaryValue}>${shippingCharges.toFixed(2)}</Text>
-        </View>
-
-        <View style={[styles.summaryRow, styles.totalRow]}>
-          <Text style={styles.totalLabel}>Total</Text>
-          <Text style={styles.totalValue}>${total.toFixed(2)}</Text>
-        </View>
-
-        <TouchableOpacity style={styles.checkoutButton}>
-          <Text style={styles.checkoutButtonText}>Checkout</Text>
-        </TouchableOpacity>
-      </View>
-    );
-  };
+  const {allProducts} = useCart();
 
   return (
     <SafeAreaView style={styles.container}>
-      {cartItems.length === 0 ? (
+      {allProducts.length === 0 ? (
         <View style={styles.emptyContainer}>
           <Text style={styles.emptyText}>Your cart is empty</Text>
         </View>
@@ -53,10 +22,10 @@ const Cart = () => {
           <FlatList
             style={styles.cartList}
             showsVerticalScrollIndicator={false}
-            data={cartItems}
+            data={allProducts}
             renderItem={({item}) => <CartItem {...item} />}
             keyExtractor={item => item.id.toString()}
-            ListFooterComponent={Footer}
+            ListFooterComponent={Summary}
           />
         </>
       )}

@@ -6,7 +6,7 @@ import AddToCartButton from './AddToCartButton';
 import QuantityController from './QuantityController';
 
 const CartController = React.memo((Props: {ProductItem: Product}) => {
-  const cartItems = useSelector((state: RootState) => state.cart.Products);
+  const cartItems = useSelector((state: RootState) => state.cart.products);
 
   // Memoize the check so it only recalculates when cartItems or ProductItem changes
   const isAddedToCart = useMemo(
