@@ -13,11 +13,11 @@ import {signIn} from '../../services/firebase/auth';
 
 const Login = () => {
   const navigation = useNavigation<AuthStackNavigationProp<'LoginScreen'>>();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
 
-  const handleLogin = async () => {
+  const handleLogin = async (formData: {email: string; password: string}) => {
+    const {email, password} = formData;
+
     if (!email.trim() || !password.trim()) {
       Alert.alert('Validation Error', 'Please enter email and password');
       return;
@@ -33,6 +33,7 @@ const Login = () => {
     try {
       await signIn(email.trim(), password);
       // Navigation will happen automatically when auth state updates
+      // RootNavigator listens to auth state and switches to MainTabs
     } catch (error: any) {
       let errorMessage = 'Login failed';
       if (error.code === 'auth/user-not-found') {

@@ -13,7 +13,6 @@ interface CartState {
 const initialState: CartState = {
   products: [],
   shippingCost: 0,
-
 };
 
 const cartSlice = createSlice({
@@ -21,9 +20,8 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
     addToCart: (state, action: PayloadAction<Product>) => {
-      if (action.payload.id !== undefined) {
-        state.products.push({...action.payload, quantity: 1} as CartItem);
-      }
+      if (action.payload.id === undefined) return;
+      state.products.push({...action.payload, quantity: 1} as CartItem);
     },
     removeFromCartById: (state, action: PayloadAction<number>) => {
       state.products = state.products.filter(

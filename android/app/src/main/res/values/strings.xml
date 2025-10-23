@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">CartlyApp</string>
+
+    <!-- Firebase Cloud Messaging Notification Channels -->
+    <string name="firebase_notification_channel_id">high_priority</string>
+    <string name="firebase_notification_channel_name">High Priority Notifications</string>
 </resources>
