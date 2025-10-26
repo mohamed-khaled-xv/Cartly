@@ -1,6 +1,6 @@
 // Main Tabs Types
 export type MainTabParamList = {
-  HomeTab: undefined;
+  HomeTab: {screen: string};
   CategoriesTab: undefined;
   CartTab: undefined;
   ProfileTab: undefined;
@@ -10,7 +10,7 @@ export type MainTabParamList = {
 export type HomeStackParamList = {
   HomeScreen: undefined;
   ProfileScreen: undefined;
-  ProductDetailScreen: {productId: string};
+  ProductDetailScreen: {productId?: string};
   SearchScreen: {query?: string};
 };
 
@@ -43,8 +43,8 @@ export type ProfileStackParamList = {
 
 // Main Tabs Navigation Props
 import type {BottomTabNavigationProp} from '@react-navigation/bottom-tabs';
-import type {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import type {RouteProp} from '@react-navigation/native';
+import type {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
 export type MainTabNavigationProp<T extends keyof MainTabParamList> =
   BottomTabNavigationProp<MainTabParamList, T>;

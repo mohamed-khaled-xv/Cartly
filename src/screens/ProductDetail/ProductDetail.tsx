@@ -10,20 +10,12 @@ import {useNavigation, useRoute} from '@react-navigation/native';
 import {HomeStackNavigationProp, HomeStackParamList} from '../../navigation/types';
 import type {RouteProp} from '@react-navigation/native';
 
-type ProductDetailRouteProp = RouteProp<
-  HomeStackParamList,
-  'ProductDetailScreen'
->;
 
 const ProductDetail = () => {
-  const navigation =
-    useNavigation<HomeStackNavigationProp<'ProductDetailScreen'>>();
-  const route = useRoute<ProductDetailRouteProp>();
-  const {productId} = route.params;
+
 
   // Mock product data - in real app, fetch from API using productId
   const product = {
-    id: productId,
     name: 'Fresh Organic Apples',
     price: 4.99,
     originalPrice: 6.99,
@@ -69,7 +61,6 @@ const ProductDetail = () => {
       <View style={styles.productInfo}>
         <View style={styles.categoryBadge}>
           <Text style={styles.categoryText}>{product.category}</Text>
-          <Text style={styles.categoryText}>{product.id}</Text>
         </View>
 
         <Text style={styles.productName}>{product.name}</Text>

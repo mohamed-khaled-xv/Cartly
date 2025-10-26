@@ -1,16 +1,16 @@
 // MainTabs.tsx
-import React from 'react';
-import Ionicons from 'react-native-vector-icons/Ionicons';
 import {
   createBottomTabNavigator,
   type BottomTabNavigationOptions,
 } from '@react-navigation/bottom-tabs';
 import type {RouteProp} from '@react-navigation/native';
+import React from 'react';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import {MainTabParamList} from './types/mainTabsTypes';
 
-import HomeStackNavigator from './HomeStack';
-import CategoriesStackNavigator from './CategoriesStack';
 import CartStackNavigator from './CartStack';
+import CategoriesStackNavigator from './CategoriesStack';
+import HomeStackNavigator from './HomeStack';
 import ProfileStackNavigator from './ProfileStack';
 
 type TabKey = keyof MainTabParamList;
@@ -88,17 +88,19 @@ const screenOptions = ({
   tabBarIcon: tabIconRenderers[route.name],
 });
 
-const MainTabs = () => (
-  <Tab.Navigator screenOptions={screenOptions}>
-    {TABS.map(({name, label, component: Comp}) => (
-      <Tab.Screen
-        key={name}
-        name={name}
-        component={Comp}
-        options={{tabBarLabel: label}}
-      />
-    ))}
-  </Tab.Navigator>
-);
+const MainTabs: React.FC = () => {
+  return (
+    <Tab.Navigator screenOptions={screenOptions} initialRouteName={'HomeTab'}>
+      {TABS.map(({name, label, component: Comp}) => (
+        <Tab.Screen
+          key={name}
+          name={name}
+          component={Comp}
+          options={{tabBarLabel: label}}
+        />
+      ))}
+    </Tab.Navigator>
+  );
+};
 
 export default MainTabs;

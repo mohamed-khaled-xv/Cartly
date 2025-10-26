@@ -1,5 +1,4 @@
-import {NavigationContainer} from '@react-navigation/native';
-import {useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {ActivityIndicator, View} from 'react-native';
 import {AuthUser, subscribeToAuthStateChanges} from '../services/firebase/auth';
 import AuthStack from './AuthStack';
@@ -32,19 +31,17 @@ const RootNavigator = () => {
 
   const isAuthenticated = !!user;
 
-  if (isAuthenticated) {
-    return (
-      <NavigationContainer>
-        <MainTabs />
-      </NavigationContainer>
-    );
-  } else {
-    return (
-      <NavigationContainer>
+  return (
+    <>
+      {isAuthenticated ? (
+        <>
+          <MainTabs />
+        </>
+      ) : (
         <AuthStack />
-      </NavigationContainer>
-    );
-  }
+      )}
+    </>
+  );
 };
 
 export default RootNavigator;
